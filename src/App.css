@@ -117,3 +117,32 @@ span {
   font-size: 14px;
   margin-bottom: 8px;
 }
+
+
+
+nav {
+  background-color: lightgreen;
+  padding: 20px;
+  margin-bottom: 3.5%;
+  margin-top: -2.75%;
+  width: 100%;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color:  lightseagreen;
+}
+
+nav a.active {
+  color: lightseagreen;
+  border-bottom: 2px solid  lightseagreen;
+}

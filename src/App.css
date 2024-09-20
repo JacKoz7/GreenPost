@@ -1,0 +1,119 @@
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  flex-direction: column;
+  background-color: #f0f0f0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.post {
+  width: 450px;
+  height: 320px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 70px;
+  border: 1px solid lightgray;
+  box-shadow: rgba(60, 60, 60, 0.2) 0px 3px 10px 0px;
+  background-color: white;
+}
+
+.post:hover {
+  box-shadow: rgba(60, 60, 60, 0.3) 0px 10px 30px 0px;
+  cursor: pointer;
+}
+
+.post .title {
+  flex: 20%;
+  border-bottom: 1px solid lightgray;
+  background-color: lightgreen;
+  display: grid;
+  place-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.post .body {
+  flex: 60%;
+  display: grid;
+  place-content: center;
+  padding: 10px;
+  text-align: center;
+}
+
+.post .footer {
+  flex: 20%;
+  border-top: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  background-color: lightgreen;
+  color: white;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  font-style: italic;
+}
+
+
+
+
+.createPostPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  border: lightseagreen 3px solid;
+}
+
+label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+input {
+  margin-bottom: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button {
+  padding: 10px;
+  background-color: lightgreen;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: lightseagreen;
+}
+
+span {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 8px;
+}

@@ -41,7 +41,7 @@ function CreatePost() {
             autocomplete="off"
             id="inputCreatePost"
             name="postText"
-            placeholder="(Ex. Post...)"
+            placeholder="(Write what's on your mind)"
           />
           <label>Username:</label>
           <ErrorMessage name="Username" component="span" />

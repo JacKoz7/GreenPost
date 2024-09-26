@@ -22,14 +22,22 @@ function Post() {
 
   const addComment = () => {
     axios
-      .post("http://localhost:3001/comments", {
-        CommentBody: newComment,
-        PostId: id,
-      })
+      .post(
+        "http://localhost:3001/comments",
+        {
+          CommentBody: newComment,
+          PostId: id,
+        },
+        { headers: { accessToken: sessionStorage.getItem("accessToken") } }
+      )
       .then((response) => {
-        const commentToAdd = { CommentBody: newComment };
-        setComments([...comments, commentToAdd]);
-        setNewComment("");
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          const commentToAdd = { CommentBody: newComment };
+          setComments([...comments, commentToAdd]);
+          setNewComment("");
+        }
       });
   };
   return (

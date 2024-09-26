@@ -256,3 +256,123 @@ nav a.active {
   cursor: pointer;
   font-size: 16px;
 }
+
+
+
+/* Center the login container on the page */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: solid 3px lightseagreen;
+}
+
+/* Style the title */
+.login-title {
+  font-size: 24px;
+  margin-top: 1px;
+  color: #333;
+}
+
+/* Style the input fields */
+.login-input {
+  width: 75%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Style the login button */
+.login-button {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  background-color: lightgreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 4%;
+}
+
+.login-button:hover {
+  background-color: lightseagreen;
+}
+
+
+
+
+
+/* Center the registration container on the page */
+.registration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: solid 3px lightseagreen;
+  padding-bottom: 0.00001%;
+}
+
+.registration-container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+/* Style the title */
+.registration-title {
+  font-size: 24px;
+  margin-top: 1px;
+  color: #333;
+}
+
+
+/* Style the input fields */
+.registration-input {
+  width: 75%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+
+/* Style the registration button */
+.registration-button {
+  width: 75%;
+  max-width: 300px;
+  padding: 10px;
+  background-color: lightgreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+.registration-button:hover {
+  background-color: lightseagreen;
+}

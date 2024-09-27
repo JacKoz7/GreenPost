@@ -28,7 +28,7 @@ function Post() {
           CommentBody: newComment,
           PostId: id,
         },
-        { headers: { accessToken: sessionStorage.getItem("accessToken") } }
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
       .then((response) => {
         if (response.data.error) {

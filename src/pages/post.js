@@ -34,7 +34,10 @@ function Post() {
         if (response.data.error) {
           console.log(response.data.error);
         } else {
-          const commentToAdd = { CommentBody: newComment };
+          const commentToAdd = {
+            CommentBody: newComment,
+            Username: response.data.Username,
+          };
           setComments([...comments, commentToAdd]);
           setNewComment("");
         }
@@ -65,7 +68,7 @@ function Post() {
           {comments.map((comment, key) => {
             return (
               <div key={key} className="comment">
-                {" "}
+                <label className="username">{comment.Username}</label>{" "}
                 {comment.CommentBody}
               </div>
             );

@@ -233,9 +233,17 @@ nav a.active {
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
-  color: forestgreen ;
+  color: forestgreen;
   border: forestgreen 1px solid;
   text-align: center;
+}
+
+.username {
+  font-weight: bold;
+  color: darkgreen;
+  margin-bottom: 5px;
+  display: block;
+  font-size: 1.1em;
 }
 
 .addCommentContainer input {

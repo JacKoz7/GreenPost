@@ -15,45 +15,54 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const [authState, setAuthState] = useState(false); // context variable to check if user is logged in or not
+  const [authState, setAuthState] = useState(
+    !!localStorage.getItem("accessToken")
+  ); // initialize authState based on localStorage
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/auth/auth", {
-        headers: { accessToken: localStorage.getItem("accesToken") },
-      })
-      .then((response) => {
-        if (response.data.error) {
-          setAuthState(false);
-        } else {
-          setAuthState(true);
-        }
-      });
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      axios
+        .get("http://localhost:3001/auth/auth", {
+          headers: { accessToken: token },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            setAuthState(false);
+          } else {
+            setAuthState(true);
+          }
+        });
+    }
   }, []); // render once when you open page
+
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    setAuthState(false);
+  };
+
   return (
     <div className="App">
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <nav>
             <NavLink to="/" activeClassName="active">
-              {" "}
-              Home Page{" "}
+              Home Page
             </NavLink>
             <NavLink to="/createpost" activeClassName="active">
-              {" "}
-              Create a Post{" "}
+              Create a Post
             </NavLink>
-            {!authState && ( // if there is no accessToken in the session storage, show the login and register links
+            {!authState ? ( // if there is no accessToken in the session storage, show the login and register links
               <>
                 <NavLink to="/login" activeClassName="active">
-                  {" "}
-                  Login{" "}
+                  Login
                 </NavLink>
                 <NavLink to="/register" activeClassName="active">
-                  {" "}
-                  Register{" "}
+                  Register
                 </NavLink>
               </>
+            ) : (
+              <button onClick={logout}>Logout</button>
             )}
           </nav>
           <Routes>

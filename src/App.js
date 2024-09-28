@@ -15,9 +15,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const [authState, setAuthState] = useState(
-    !!localStorage.getItem("accessToken")
-  ); // initialize authState based on localStorage
+  const [authState, setAuthState] = useState({
+    Username: "",
+    id: 0,
+    status: false,
+  }); // initialize authState based on localStorage
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -28,9 +30,13 @@ function App() {
         })
         .then((response) => {
           if (response.data.error) {
-            setAuthState(false);
+            setAuthState({ ...authState, status: false });
           } else {
-            setAuthState(true);
+            setAuthState({
+              Username: response.data.Username,
+              id: response.data.id,
+              status: true,
+            });
           }
         });
     }
@@ -38,7 +44,7 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem("accessToken");
-    setAuthState(false);
+    setAuthState({ Username: "", id: 0, status: false });
   };
 
   return (
@@ -52,7 +58,7 @@ function App() {
             <NavLink to="/createpost" activeClassName="active">
               Create a Post
             </NavLink>
-            {!authState ? ( // if there is no accessToken in the session storage, show the login and register links
+            {!authState.status ? ( // if there is no accessToken in the session storage, show the login and register links
               <>
                 <NavLink to="/login" activeClassName="active">
                   Login
@@ -64,6 +70,7 @@ function App() {
             ) : (
               <button onClick={logout}>Logout</button>
             )}
+            <span>{authState.Username}</span>
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />

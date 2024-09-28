@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
+import { AuthContext } from "../helpers/AuthContext";
 
 function Post() {
   let { id } = useParams();
   const [postObject, setPostObject] = useState({});
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const { authState } = useContext(AuthContext);
 
   useEffect(() => {
     //api request to get data from the post
@@ -18,7 +20,7 @@ function Post() {
     axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
       setComments(response.data);
     });
-  }, []);
+  }, [id]);
 
   const addComment = () => {
     axios
@@ -35,6 +37,7 @@ function Post() {
           console.log(response.data.error);
         } else {
           const commentToAdd = {
+            id: response.data.id, // Ensure the id is set here
             CommentBody: newComment,
             Username: response.data.Username,
           };
@@ -43,6 +46,19 @@ function Post() {
         }
       });
   };
+
+  const deleteComment = (id) => {
+    axios.delete(`http://localhost:3001/comments/${id}`, {
+      headers: { accessToken: localStorage.getItem("accessToken") },
+    }).then(() => {
+      setComments(
+        comments.filter((val) => {
+          return val.id !== id;
+        })
+      );
+    });
+  };
+
   return (
     <div className="postPage">
       <div className="upperPart">
@@ -62,7 +78,9 @@ function Post() {
               setNewComment(event.target.value);
             }}
           />
-          <button onClick={addComment} className="addCommentButton">Add Comment</button>
+          <button onClick={addComment} className="addCommentButton">
+            Add Comment
+          </button>
         </div>
         <div className="listOfComments">
           {comments.map((comment, key) => {
@@ -70,6 +88,15 @@ function Post() {
               <div key={key} className="comment">
                 <label className="username">{comment.Username}</label>{" "}
                 {comment.CommentBody}
+                {authState.Username === comment.Username && (
+                  <button
+                    onClick={() => {
+                      deleteComment(comment.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             );
           })}

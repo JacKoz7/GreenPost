@@ -265,6 +265,9 @@ nav a.active {
   font-size: 16px;
 }
 
+.addCommentButton:hover {
+  background-color: lightseagreen;
+}
 
 
 /* Center the login container on the page */

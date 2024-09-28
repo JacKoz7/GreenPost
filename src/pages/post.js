@@ -62,7 +62,7 @@ function Post() {
               setNewComment(event.target.value);
             }}
           />
-          <button onClick={addComment}>Add Comment</button>
+          <button onClick={addComment} className="addCommentButton">Add Comment</button>
         </div>
         <div className="listOfComments">
           {comments.map((comment, key) => {

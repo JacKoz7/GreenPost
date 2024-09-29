@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios"; // used to make requests to the backend
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'; // custom pop up windows
 
 function Home() {
   const [listOfPosts, setListOfPosts] = useState([]);
@@ -15,11 +17,17 @@ function Home() {
   }, []);
 
   const likePost = (postId) => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      toast.error("You need to be logged in to like a post");
+      return;
+    }
+
     axios
       .post(
         "http://localhost:3001/likes",
         { PostId: postId },
-        { headers: { accessToken: localStorage.getItem("accessToken") } }
+        { headers: { accessToken: accessToken } }
       )
       .then((response) => {
         setListOfPosts(
@@ -39,11 +47,13 @@ function Home() {
         );
       });
   };
+
   return (
     <div>
+      <ToastContainer />
       {listOfPosts.map((value, key) => {
         return (
-          <div className="post">
+          <div className="post" key={key}>
             <div className="title"> {value.title} </div>
             <div
               className="body"

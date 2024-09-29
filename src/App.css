@@ -27,8 +27,6 @@ body {
   background-color: white;
 }
 
-
-
 .post:hover {
   box-shadow: rgba(60, 60, 60, 0.3) 0px 10px 30px 0px;
   cursor: pointer;
@@ -57,12 +55,38 @@ body {
   border-top: 1px solid lightgray;
   display: flex;
   align-items: center;
-  padding-left: 15px;
+  padding: 0 15px;
   background-color: lightgreen;
   color: white;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   font-style: italic;
+  justify-content: space-between;
+}
+
+.likeButton {
+  background-color: #007bff; /* Niebieski kolor */
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.likeButton:hover {
+  background-color: #0056b3; /* Ciemniejszy niebieski kolor */
+  transform: scale(1.25);
+}
+
+.likeCounter {
+  font-size: 18px;
+  font-weight: bold;
+  color: white; 
+  margin-left: 4px;
+  background-color: #007bff;
+  padding: 10px 15px; 
+  padding-left: 8px;
+  border-radius: 8px; 
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Dodano poświatę */
 }
 
 

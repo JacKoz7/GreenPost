@@ -3,7 +3,7 @@ import axios from "axios"; // used to make requests to the backend
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'; // custom pop up windows
+import "react-toastify/dist/ReactToastify.css"; // custom pop up windows
 
 function Home() {
   const [listOfPosts, setListOfPosts] = useState([]);
@@ -65,14 +65,17 @@ function Home() {
             </div>
             <div className="footer">
               {value.Username}
-              <button
-                onClick={() => {
-                  likePost(value.id);
-                }}
-              >
-                Like
-              </button>
-              <label> {value.Likes.length} </label>
+              <div className="likeSection">
+                <button
+                  className="likeButton"
+                  onClick={() => {
+                    likePost(value.id);
+                  }}
+                >
+                  Like
+                </button>
+                <label className="likeCounter"> {value.Likes.length} </label>
+              </div>
             </div>
           </div>
         );

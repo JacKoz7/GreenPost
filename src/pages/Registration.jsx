@@ -48,7 +48,11 @@ function Registration() {
         }
       });
     }).catch((error) => {
-      toast.error("An error occurred. Please try again.");
+      if (error.response && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     });
   };
 

@@ -148,7 +148,6 @@ nav a:hover {
 
 nav a.active {
   color: lightseagreen;
-  border-bottom: 2px solid lightseagreen;
 }
 
 .navButton {
@@ -181,6 +180,21 @@ nav a.active {
   padding: 0.4%;
   border-radius: 8%;
 }
+
+.NavLogo {
+  position: absolute;
+  left: 0px; /* Adjust the value as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  border-bottom: none;
+}
+
+.logoImage {
+  height: 120px; /* Adjust the height as needed */
+  width: auto; /* Maintain aspect ratio */
+  border-bottom: none;
+}
+
 
 
 

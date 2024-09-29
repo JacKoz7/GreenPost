@@ -13,6 +13,7 @@ import Registration from "./pages/Registration";
 import { AuthContext } from "./helpers/AuthContext";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import logo from "./images/logo.png";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -52,6 +53,9 @@ function App() {
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <nav>
+            <NavLink to="/" activeClassName="active" className="NavLogo">
+              <img src={logo} alt="Logo" className="logoImage" />
+            </NavLink>
             <NavLink to="/" activeClassName="active">
               Home Page
             </NavLink>
@@ -72,7 +76,9 @@ function App() {
                 <button onClick={logout} className="navButton">
                   Logout
                 </button>
-                <span className="navUsername">Logged in as {authState.Username}</span>
+                <span className="navUsername">
+                  Logged in as {authState.Username}
+                </span>
               </>
             )}
           </nav>

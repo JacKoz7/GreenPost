@@ -58,7 +58,7 @@ function App() {
             <NavLink to="/createpost" activeClassName="active">
               Create a Post
             </NavLink>
-            {!authState.status ? ( // if there is no accessToken in the session storage, show the login and register links
+            {!authState.status ? (
               <>
                 <NavLink to="/login" activeClassName="active">
                   Login
@@ -68,9 +68,13 @@ function App() {
                 </NavLink>
               </>
             ) : (
-              <button onClick={logout}>Logout</button>
+              <>
+                <button onClick={logout} className="navButton">
+                  Logout
+                </button>
+                <span className="navUsername">Logged in as {authState.Username}</span>
+              </>
             )}
-            <span>{authState.Username}</span>
           </nav>
           <Routes>
             <Route path="/" element={<Home />} />

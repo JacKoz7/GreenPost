@@ -130,6 +130,7 @@ nav {
   margin-top: -2.75%;
   width: 100%;
   text-align: center;
+  position: relative; /* Set relative positioning for the nav */
 }
 
 nav a {
@@ -142,12 +143,43 @@ nav a {
 }
 
 nav a:hover {
-  color:  lightseagreen;
+  color: lightseagreen;
 }
 
 nav a.active {
   color: lightseagreen;
-  border-bottom: 2px solid  lightseagreen;
+  border-bottom: 2px solid lightseagreen;
+}
+
+.navButton {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+  position: absolute; /* Set absolute positioning for the button */
+  top: 50%; /* Center vertically */
+  right: 20px; /* Position 20px from the right */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+}
+
+.navButton:hover {
+  background-color: darkred;
+}
+
+.navUsername {
+  color: forestgreen;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 15px;
+  font-family: 'Tahoma', sans-serif; /* Change the font family as needed */
+  border: forestgreen 4px solid;
+  padding: 0.4%;
+  border-radius: 8%;
 }
 
 
@@ -236,6 +268,9 @@ nav a.active {
   color: forestgreen;
   border: forestgreen 1px solid;
   text-align: center;
+  word-wrap: break-word; /* Ensures long words break to fit within the container */
+  overflow-wrap: break-word; /* Ensures long words break to fit within the container */
+  position: relative; /* Set relative positioning for the comment container */
 }
 
 .username {
@@ -269,6 +304,26 @@ nav a.active {
   background-color: lightseagreen;
 }
 
+.deleteButton {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  position: absolute; /* Set absolute positioning for the delete button */
+  top: 6px; /* Adjust the top position as needed */
+  right: 6px; /* Adjust the right position as needed */
+  width: 80px; /* Set the width of the button */
+  height: 24px; /* Set the height of the button */
+  font-size: 12px; /* Adjust the font size as needed */
+  line-height: 0; /* Adjust the line height to match the button height */
+}
+
+.deleteButton:hover {
+  background-color: darkred;
+}
 
 /* Center the login container on the page */
 .login-container {

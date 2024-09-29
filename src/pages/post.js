@@ -89,7 +89,7 @@ function Post() {
                 <label className="username">{comment.Username}</label>{" "}
                 {comment.CommentBody}
                 {authState.Username === comment.Username && (
-                  <button
+                  <button className="deleteButton"
                     onClick={() => {
                       deleteComment(comment.id);
                     }}

@@ -32,21 +32,6 @@ function Registration() {
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/auth", data).then((response) => {
       toast.success("Account created successfully!");
-
-      // Automatically log in the user after successful registration
-      axios.post("http://localhost:3001/auth/login", data).then((loginResponse) => {
-        if (loginResponse.data.error) {
-          toast.error(loginResponse.data.error);
-        } else {
-          localStorage.setItem("accessToken", loginResponse.data.token);
-          setAuthState({
-            Username: loginResponse.data.Username,
-            id: loginResponse.data.id,
-            status: true,
-          });
-          navigate("/");
-        }
-      });
     }).catch((error) => {
       if (error.response && error.response.data.error) {
         toast.error(error.response.data.error);

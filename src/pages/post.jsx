@@ -16,13 +16,17 @@ function Post() {
 
   useEffect(() => {
     //api request to get data from the post
-    axios.get(`https://greenpostapp-7e2958a55f01.herokuapp.com/posts/byId/${id}`).then((response) => {
-      setPostObject(response.data);
-    });
+    axios
+      .get(`https://greenpostapp-7e2958a55f01.herokuapp.com/posts/byId/${id}`)
+      .then((response) => {
+        setPostObject(response.data);
+      });
 
-    axios.get(`https://greenpostapp-7e2958a55f01.herokuapp.com/comments/${id}`).then((response) => {
-      setComments(response.data);
-    });
+    axios
+      .get(`https://greenpostapp-7e2958a55f01.herokuapp.com/comments/${id}`)
+      .then((response) => {
+        setComments(response.data);
+      });
   }, [id]);
 
   const addComment = () => {
@@ -52,9 +56,12 @@ function Post() {
 
   const deleteComment = (id) => {
     axios
-      .delete(`https://greenpostapp-7e2958a55f01.herokuapp.com/comments/${id}`, {
-        headers: { accessToken: localStorage.getItem("accessToken") },
-      })
+      .delete(
+        `https://greenpostapp-7e2958a55f01.herokuapp.com/comments/${id}`,
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        }
+      )
       .then(() => {
         setComments(
           comments.filter((val) => {
@@ -70,7 +77,7 @@ function Post() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
-        alert("Post deleted")
+        alert("Post deleted");
         navigate("/");
       });
   };
@@ -79,7 +86,7 @@ function Post() {
     <div className="postPage">
       <div className="upperPart">
         <div className="title">
-          {postObject.title}
+          <div className="titleText">{postObject.title}</div>
           {authState.Username === postObject.Username && (
             <button
               onClick={() => {

@@ -27,7 +27,7 @@ function App() {
     const token = localStorage.getItem("accessToken");
     if (token) {
       axios
-        .get("http://localhost:3001/auth/auth", {
+        .get("https://greenpostapp-7e2958a55f01.herokuapp.com/auth/auth", {
           headers: { accessToken: token },
         })
         .then((response) => {

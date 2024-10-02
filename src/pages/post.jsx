@@ -16,11 +16,11 @@ function Post() {
 
   useEffect(() => {
     //api request to get data from the post
-    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
+    axios.get(`https://greenpostapp-7e2958a55f01.herokuapp.com/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
 
-    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+    axios.get(`https://greenpostapp-7e2958a55f01.herokuapp.com/comments/${id}`).then((response) => {
       setComments(response.data);
     });
   }, [id]);
@@ -28,7 +28,7 @@ function Post() {
   const addComment = () => {
     axios
       .post(
-        "http://localhost:3001/comments",
+        "https://greenpostapp-7e2958a55f01.herokuapp.com/comments",
         {
           CommentBody: newComment,
           PostId: id,
@@ -52,7 +52,7 @@ function Post() {
 
   const deleteComment = (id) => {
     axios
-      .delete(`http://localhost:3001/comments/${id}`, {
+      .delete(`https://greenpostapp-7e2958a55f01.herokuapp.com/comments/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
@@ -66,7 +66,7 @@ function Post() {
 
   const deletePost = (id) => {
     axios
-      .delete(`http://localhost:3001/posts/${id}`, {
+      .delete(`https://greenpostapp-7e2958a55f01.herokuapp.com/posts/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {

@@ -30,7 +30,7 @@ function Registration() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3001/auth", data).then((response) => {
+    axios.post("https://greenpostapp-7e2958a55f01.herokuapp.com/auth", data).then((response) => {
       toast.success("Account created successfully!");
     }).catch((error) => {
       if (error.response && error.response.data.error) {

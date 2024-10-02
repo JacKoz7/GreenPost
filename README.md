@@ -1,6 +1,7 @@
 # GreenPost Frontend
 
 Frontend of the GreenPost project built using React.
+https://greenpost.netlify.app
 
 ## Description
 

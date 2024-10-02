@@ -9,6 +9,7 @@ import Home from "./pages/home";
 import CreatePost from "./pages/createpost";
 import Post from "./pages/post";
 import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
 import Registration from "./pages/Registration";
 import { AuthContext } from "./helpers/AuthContext";
 import { useState, useEffect } from "react";
@@ -31,7 +32,7 @@ function App() {
         })
         .then((response) => {
           if (response.data.error) {
-            setAuthState({ ...authState, status: false });
+            setAuthState((prevState) => ({ ...prevState, status: false }));
           } else {
             setAuthState({
               Username: response.data.Username,
@@ -41,7 +42,8 @@ function App() {
           }
         });
     }
-  }, []); // render once when you open page
+  }, []); // Tablica zależności jest teraz pusta, bo używasz funkcjonalnego update'a
+  
 
   const logout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
@@ -55,26 +57,43 @@ function App() {
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <nav>
-            <NavLink to="/" className={({ isActive }) => isActive ? "active NavLogo" : "NavLogo"}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "active NavLogo" : "NavLogo"
+              }
+            >
               <img src={logo} alt="Logo" className="logoImage" />
-            </NavLink>
-            <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
-              Home Page
-            </NavLink>
-            <NavLink to="/createpost" className={({ isActive }) => isActive ? "active" : ""}>
-              Create a Post
             </NavLink>
             {!authState.status ? (
               <>
-                <NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
                   Login
                 </NavLink>
-                <NavLink to="/register" className={({ isActive }) => isActive ? "active" : ""}>
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
                   Register
                 </NavLink>
               </>
             ) : (
               <>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Home Page
+                </NavLink>
+                <NavLink
+                  to="/createpost"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Create a Post
+                </NavLink>
                 <button onClick={logout} className="navButton">
                   Logout
                 </button>
@@ -90,6 +109,7 @@ function App() {
             <Route path="/post/:id" element={<Post />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
       </AuthContext.Provider>

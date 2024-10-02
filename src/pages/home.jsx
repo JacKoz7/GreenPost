@@ -1,20 +1,29 @@
 import React from "react";
 import axios from "axios"; // used to make requests to the backend
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // custom pop up windows
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../helpers/AuthContext";
 
 function Home() {
   const [listOfPosts, setListOfPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
+  const { authState } = useContext(AuthContext);
   let navigate = useNavigate();
 
   useEffect(() => {
-    // get request from backend database
-    axios.get("http://localhost:3001/posts").then((response) => {
-      setListOfPosts(response.data);
-    });
-  }, []);
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    } else {
+      // get request from backend database
+      axios.get("http://localhost:3001/posts").then((response) => {
+        setListOfPosts(response.data);
+      });
+    }
+  }, [authState, navigate]);
 
   const likePost = (postId) => {
     const accessToken = localStorage.getItem("accessToken");
@@ -34,8 +43,10 @@ function Home() {
           listOfPosts.map((post) => {
             if (post.id === postId) {
               if (response.data.liked) {
+                setLikedPosts([...likedPosts, postId]);
                 return { ...post, Likes: [...post.Likes, 0] };
               } else {
+                setLikedPosts(likedPosts.filter((id) => id !== postId));
                 const likesArray = post.Likes;
                 likesArray.pop();
                 return { ...post, Likes: likesArray };
@@ -65,16 +76,22 @@ function Home() {
             </div>
             <div className="footer">
               {value.Username}
-              <div className="likeSection">
+              <div>
                 <button
                   className="likeButton"
                   onClick={() => {
                     likePost(value.id);
                   }}
                 >
-                  Like
+                  <FontAwesomeIcon icon={faThumbsUp} /> Like
                 </button>
-                <label className="likeCounter"> {value.Likes.length} </label>
+                <label
+                  className={`likeCounter ${
+                    likedPosts.includes(value.id) ? "liked" : ""
+                  }`}
+                >
+                  {value.Likes.length}
+                </label>
               </div>
             </div>
           </div>

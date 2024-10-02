@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
 import { AuthContext } from "../helpers/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Post() {
   let { id } = useParams();
@@ -10,6 +11,8 @@ function Post() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const { authState } = useContext(AuthContext);
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     //api request to get data from the post
@@ -48,21 +51,46 @@ function Post() {
   };
 
   const deleteComment = (id) => {
-    axios.delete(`http://localhost:3001/comments/${id}`, {
-      headers: { accessToken: localStorage.getItem("accessToken") },
-    }).then(() => {
-      setComments(
-        comments.filter((val) => {
-          return val.id !== id;
-        })
-      );
-    });
+    axios
+      .delete(`http://localhost:3001/comments/${id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then(() => {
+        setComments(
+          comments.filter((val) => {
+            return val.id !== id;
+          })
+        );
+      });
+  };
+
+  const deletePost = (id) => {
+    axios
+      .delete(`http://localhost:3001/posts/${id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then(() => {
+        alert("Post deleted")
+        navigate("/");
+      });
   };
 
   return (
     <div className="postPage">
       <div className="upperPart">
-        <div className="title">{postObject.title}</div>
+        <div className="title">
+          {postObject.title}
+          {authState.Username === postObject.Username && (
+            <button
+              onClick={() => {
+                deletePost(postObject.id);
+              }}
+              className="deletePost"
+            >
+              Delete Post
+            </button>
+          )}
+        </div>
         <div className="postText">{postObject.postText}</div>
         <div className="footer">{postObject.Username}</div>
       </div>
@@ -89,7 +117,8 @@ function Post() {
                 <label className="username">{comment.Username}</label>{" "}
                 {comment.CommentBody}
                 {authState.Username === comment.Username && (
-                  <button className="deleteButton"
+                  <button
+                    className="deleteButton"
                     onClick={() => {
                       deleteComment(comment.id);
                     }}

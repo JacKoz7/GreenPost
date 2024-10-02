@@ -1,3 +1,23 @@
+.logoImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Wyśrodkuj w poziomie */
+}
+
+@media (max-width: 768px) {
+  .logoImage {
+    width: 50vw; /* Skaluje logo w zależności od szerokości ekranu */
+  }
+}
+
+@media (max-width: 480px) {
+  .logoImage {
+    width: 40vw; /* Dopasowuje logo do jeszcze mniejszych ekranów */
+  }
+}
+
+
 .App {
   width: 100%;
   min-height: 100vh;
@@ -74,7 +94,7 @@ body {
 
 .likeButton:hover {
   background-color: #0056b3; /* Ciemniejszy niebieski kolor */
-  transform: scale(1.25);
+  transform: scale(1.1);
 }
 
 .likeCounter {
@@ -84,9 +104,14 @@ body {
   margin-left: 4px;
   background-color: #007bff;
   padding: 7px 12px; 
-  padding-left: 6px;
+  padding-left: 10px;
   border-radius: 8px; 
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Dodano poświatę */
+}
+
+.liked {
+  color: orange; /* Żółty kolor */
+  text-shadow: 0 0 10px orange; /* Dodano oświetlenie żółtego tekstu */
 }
 
 
@@ -357,6 +382,18 @@ nav a.active {
   height: 24px; /* Set the height of the button */
   font-size: 12px; /* Adjust the font size as needed */
   line-height: 0; /* Adjust the line height to match the button height */
+}
+
+.deletePost {
+  background-color: red;
+  position: absolute;
+  top: 18%;
+  right: 27%;
+  border-radius: 7px;
+}
+
+.deletePost:hover {
+  background-color: darkred;
 }
 
 .deleteButton:hover {

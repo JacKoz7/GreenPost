@@ -1,15 +1,30 @@
-# Getting Started with Create React App
+# GreenPost Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend of the GreenPost project built using React.
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This project is the frontend part of the GreenPost web application, which communicates with the backend via API. The application includes features such as user login, registration, creating posts, viewing posts, commenting, liking, deleting posts, and deleting comments.
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To run the project locally, follow these steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/JacKoz7/GreenPost-frontend
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd GreenPost-frontend
+    ```
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+## Usage
+
+To run the application locally:
+```bash
+npm start

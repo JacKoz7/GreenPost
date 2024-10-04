@@ -135,6 +135,7 @@ body {
 }
 
 .createPostPage {
+  margin-top: -3%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -387,11 +388,8 @@ nav a.active {
   cursor: pointer;
   font-size: 16px;
   padding: 10px;
-  position: absolute; /* Set absolute positioning for the delete button */
   top: 6px; /* Adjust the top position as needed */
   right: 6px; /* Adjust the right position as needed */
-  width: 80px; /* Set the width of the button */
-  height: 24px; /* Set the height of the button */
   font-size: 12px; /* Adjust the font size as needed */
   line-height: 0; /* Adjust the line height to match the button height */
 }

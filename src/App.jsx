@@ -69,7 +69,7 @@ function App() {
               <>
                 <NavLink
                   to="/login"
-                  className={({ isActive }) => (isActive ? "active" : "")}
+                  className={({ isActive }) => (isActive ? "active" : "")} 
                 >
                   Login
                 </NavLink>

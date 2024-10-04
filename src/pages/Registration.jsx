@@ -5,9 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../helpers/AuthContext";
+
 
 function Registration() {
   const initialValues = {
@@ -25,9 +23,6 @@ function Registration() {
       .max(15)
       .required("You must input a username!"),
   });
-
-  const { setAuthState } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     axios.post("https://greenpostapp-7e2958a55f01.herokuapp.com/auth", data).then((response) => {

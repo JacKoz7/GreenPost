@@ -72,12 +72,15 @@ function Post() {
   };
 
   const deletePost = (id) => {
+    if (!window.confirm("Are you sure you want to delete post?")) {
+      return;
+    }
+  
     axios
       .delete(`https://greenpostapp-7e2958a55f01.herokuapp.com/posts/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
-        alert("Post deleted");
         navigate("/");
       });
   };

@@ -31,10 +31,14 @@ function CreatePost() {
         navigate("/");
       });
   };
+
   const validationSchema = Yup.object().shape({
-    title: Yup.string().required("You must input a title!"),
+    title: Yup.string()
+      .required("You must input a title!")
+      .max(15, "Title cannot be longer than 16 characters"),
     postText: Yup.string().required("You must input a post!"),
   });
+
   return (
     <div className="createPostPage">
       <Formik

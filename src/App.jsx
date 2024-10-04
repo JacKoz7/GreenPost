@@ -42,7 +42,7 @@ function App() {
           }
         });
     }
-  }, []); // Tablica zależności jest teraz pusta, bo używasz funkcjonalnego update'a
+  }, []); // empty array to run only once
   
 
   const logout = () => {
@@ -111,6 +111,9 @@ function App() {
             <Route path="/register" element={<Registration />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
+          <footer>
+            <p>© 2024 GreenPost</p>
+          </footer>
         </Router>
       </AuthContext.Provider>
     </div>

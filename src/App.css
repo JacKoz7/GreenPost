@@ -17,7 +17,6 @@
   }
 }
 
-
 .App {
   width: 100%;
   min-height: 100vh;
@@ -25,7 +24,8 @@
   align-items: center;
   padding-top: 40px;
   flex-direction: column;
-  background-color: forestgreen;
+  /* background-color: forestgreen; */
+  background: linear-gradient(135deg, lightgreen, lightseagreen);
 }
 
 body {
@@ -72,8 +72,8 @@ body {
 .titleText {
   margin-bottom: -25%;
   text-align: center;
-  font-family:  'Tahoma', sans-serif;
-  color: black; 
+  font-family: "Tahoma", sans-serif;
+  color: black;
 }
 
 .deletePost {
@@ -125,18 +125,14 @@ body {
 .likeCounter {
   font-size: 18px;
   font-weight: bold;
-  color: white; 
+  color: white;
   margin-left: 4px;
   background-color: #007bff;
-  padding: 7px 12px; 
+  padding: 7px 12px;
   padding-left: 10px;
-  border-radius: 8px; 
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Dodano poświatę */
 }
-
-
-
-
 
 .createPostPage {
   display: flex;
@@ -190,10 +186,41 @@ span {
   margin-bottom: 8px;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.App {
+  flex: 1;
+}
+
+footer {
+  background: linear-gradient(to right, #006400, #00FF00);
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-bottom: 0;
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+p{
+  color: white;
+}
 
 nav {
-  background-color: lightgreen;
+  background: linear-gradient(to right, #006400, #00FF00);
   padding-top: 2%;
   padding-bottom: 2%;
   margin-bottom: 3.5%;
@@ -213,11 +240,11 @@ nav a {
 }
 
 nav a:hover {
-  color: lightseagreen;
+  color: green;
 }
 
 nav a.active {
-  color: lightseagreen;
+  color: green;
 }
 
 .navButton {
@@ -245,7 +272,7 @@ nav a.active {
   font-size: 18px;
   font-weight: bold;
   margin: 0 15px;
-  font-family: 'Tahoma', sans-serif; /* Change the font family as needed */
+  font-family: "Tahoma", sans-serif; /* Change the font family as needed */
   border: forestgreen 4px solid;
   padding: 0.4%;
   border-radius: 8%;
@@ -260,14 +287,10 @@ nav a.active {
 }
 
 .logoImage {
-  height: 120px; /* Adjust the height as needed */
+  height: 12vh; /* 12% wysokości okna przeglądarki */
   width: auto; /* Maintain aspect ratio */
   border-bottom: none;
 }
-
-
-
-
 
 .upperPart {
   width: 700px;
@@ -314,7 +337,7 @@ nav a.active {
   font-style: italic;
 }
 /* comment section */
-.lowerPart { 
+.lowerPart {
   width: 700px;
   min-height: 10px;
   border-radius: 12px;
@@ -326,7 +349,6 @@ nav a.active {
   background-color: white;
   margin-bottom: 8%;
 }
-
 
 .addCommentContainer {
   margin-bottom: 20px;
@@ -378,7 +400,6 @@ nav a.active {
   background-color: darkred;
 }
 
-
 .username {
   font-weight: bold;
   color: darkgreen;
@@ -409,10 +430,6 @@ nav a.active {
 .addCommentButton:hover {
   background-color: lightseagreen;
 }
-
-
-
-
 
 /* Center the login container on the page */
 .login-container {
@@ -465,10 +482,6 @@ nav a.active {
   background-color: lightseagreen;
 }
 
-
-
-
-
 /* Center the registration container on the page */
 .registration-container {
   display: flex;
@@ -499,7 +512,6 @@ nav a.active {
   color: #333;
 }
 
-
 /* Style the input fields */
 .registration-input {
   width: 75%;
@@ -510,7 +522,6 @@ nav a.active {
   border-radius: 5px;
   font-size: 16px;
 }
-
 
 /* Style the registration button */
 .registration-button {

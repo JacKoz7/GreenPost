@@ -431,6 +431,7 @@ nav a.active {
 
 /* Center the login container on the page */
 .login-container {
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;

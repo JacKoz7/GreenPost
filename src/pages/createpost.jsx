@@ -36,7 +36,9 @@ function CreatePost() {
     title: Yup.string()
       .required("You must input a title!")
       .max(15, "Title cannot be longer than 16 characters"),
-    postText: Yup.string().required("You must input a post!"),
+    postText: Yup.string()
+      .required("You must input a post!")
+      .max(255, "Post cannot be longer than 255 characters"),
   });
 
   return (

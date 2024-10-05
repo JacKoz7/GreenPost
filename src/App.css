@@ -323,6 +323,9 @@ nav a.active {
   place-content: center;
   padding: 10px;
   text-align: center;
+  white-space: normal; /* Allow text to wrap onto new lines */
+  overflow-wrap: break-word; /* Break long words and wrap onto the next line */
+  word-break: break-word; /* Break words at arbitrary points to prevent overflow */
 }
 
 .upperPart .footer {
@@ -378,6 +381,17 @@ nav a.active {
   word-wrap: break-word; /* Ensures long words break to fit within the container */
   overflow-wrap: break-word; /* Ensures long words break to fit within the container */
   position: relative; /* Set relative positioning for the comment container */
+}
+
+.post {
+  max-width: 100%; /* Ensure the container does not exceed its parent's width */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+.body {
+  white-space: normal; /* Allow text to wrap onto new lines */
+  overflow-wrap: break-word; /* Break long words and wrap onto the next line */
+  word-break: break-word; /* Break words at arbitrary points to prevent overflow */
 }
 
 .deleteButton {

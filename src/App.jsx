@@ -43,7 +43,6 @@ function App() {
         });
     }
   }, []); // empty array to run only once
-  
 
   const logout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
@@ -57,19 +56,19 @@ function App() {
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <nav>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "active NavLogo" : "NavLogo"
-              }
-            >
-              <img src={logo} alt="Logo" className="logoImage" />
-            </NavLink>
             {!authState.status ? (
               <>
                 <NavLink
                   to="/login"
-                  className={({ isActive }) => (isActive ? "active" : "")} 
+                  className={({ isActive }) =>
+                    isActive ? "active NavLogo" : "NavLogo"
+                  }
+                >
+                  <img src={logo} alt="Logo" className="logoImage" />
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Login
                 </NavLink>
@@ -82,6 +81,14 @@ function App() {
               </>
             ) : (
               <>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "active NavLogo" : "NavLogo"
+                  }
+                >
+                  <img src={logo} alt="Logo" className="logoImage" />
+                </NavLink>
                 <NavLink
                   to="/"
                   className={({ isActive }) => (isActive ? "active" : "")}

@@ -4,8 +4,7 @@ import "../App.css";
 import * as Yup from "yup";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 
 function Registration() {
   const initialValues = {
@@ -18,32 +17,49 @@ function Registration() {
       .min(6)
       .max(15)
       .required("You must input a password!"),
-    Username: Yup.string()
-      .min(3)
-      .max(15)
-      .required("You must input a username!"),
+    Password: Yup.string()
+      .min(6, "Password must be at least 6 characters long")
+      .max(15, "Password cannot exceed 15 characters")
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,15}$/,
+        "Password must contain at least one letter and one number"
+      )
+      .required("You must input a password!"),
   });
 
   const onSubmit = (data) => {
-    axios.post("https://greenpostapp-7e2958a55f01.herokuapp.com/auth", data).then((response) => {
-      toast.success("Account created successfully!");
-    }).catch((error) => {
-      if (error.response && error.response.data.error) {
-        toast.error(error.response.data.error);
-      } else {
-        toast.error("An error occurred. Please try again.");
-      }
-    });
+    axios
+      .post("https://greenpostapp-7e2958a55f01.herokuapp.com/auth", data)
+      .then((response) => {
+        toast.success("Account created successfully!");
+      })
+      .catch((error) => {
+        if (error.response && error.response.data.error) {
+          toast.error(error.response.data.error);
+        } else {
+          toast.error(
+            "Password must contain at least six letters and one number"
+          );
+        }
+      });
   };
 
   return (
     <div className="registration-container">
       <ToastContainer />
       <h2 className="registration-title">Register</h2>
-      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
         <Form className="registration-form">
           <label className="registration-label">Username:</label>
-          <ErrorMessage name="Username" component="span" className="registration-error" />
+          <ErrorMessage
+            name="Username"
+            component="span"
+            className="registration-error"
+          />
           <Field
             autoComplete="off"
             className="registration-input"
@@ -51,7 +67,11 @@ function Registration() {
             placeholder="(Ex. John...)"
           />
           <label className="registration-label">Password:</label>
-          <ErrorMessage name="Password" component="span" className="registration-error" />
+          <ErrorMessage
+            name="Password"
+            component="span"
+            className="registration-error"
+          />
           <Field
             autoComplete="off"
             className="registration-input"
@@ -59,7 +79,9 @@ function Registration() {
             placeholder="Your password"
             type="password"
           />
-          <button type="submit" className="registration-button">Register</button>
+          <button type="submit" className="registration-button">
+            Register
+          </button>
         </Form>
       </Formik>
     </div>

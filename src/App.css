@@ -70,6 +70,7 @@ body {
 }
 
 .titleText {
+  cursor: pointer;
   margin-bottom: -25%;
   text-align: center;
   font-family: "Tahoma", sans-serif;
@@ -318,6 +319,7 @@ nav a.active {
 }
 
 .upperPart .postText {
+  cursor: pointer;
   flex: 66%;
   display: grid;
   place-content: center;

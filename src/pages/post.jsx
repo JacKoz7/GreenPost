@@ -75,7 +75,7 @@ function Post() {
     if (!window.confirm("Are you sure you want to delete post?")) {
       return;
     }
-  
+
     axios
       .delete(`https://greenpostapp-7e2958a55f01.herokuapp.com/posts/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
@@ -85,11 +85,54 @@ function Post() {
       });
   };
 
+  const editPost = (option) => {
+    if (option === "title") {
+      let newTitle = prompt("Enter new title:");
+      if (!newTitle || newTitle.trim() === "") {
+        alert("Title cannot be empty!");
+        return;
+      }
+      axios.put(
+        "https://greenpostapp-7e2958a55f01.herokuapp.com/posts/title",
+        {
+          newTitle: newTitle,
+          id: id,
+        },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      );
+      setPostObject({ ...postObject, title: newTitle });
+    } else {
+      let newPostText = prompt("Enter new post text:");
+      if (!newPostText || newPostText.trim() === "") {
+        alert("Post content cannot be empty!");
+        return;
+      }
+      axios.put(
+        "https://greenpostapp-7e2958a55f01.herokuapp.com/posts/postText",
+        {
+          newText: newPostText,
+          id: id,
+        },
+        { headers: { accessToken: localStorage.getItem("accessToken") } }
+      );
+      setPostObject({ ...postObject, postText: newPostText });
+    }
+  };
+
   return (
     <div className="postPage">
       <div className="upperPart">
         <div className="title">
-          <div className="titleText">{postObject.title}</div>
+          <div
+            className="titleText"
+            onClick={() => {
+              if (authState.Username === postObject.Username) {
+                editPost("title");
+              }
+            }}
+          >
+            {postObject.title}
+          </div>
           {authState.Username === postObject.Username && (
             <button
               onClick={() => {
@@ -101,7 +144,16 @@ function Post() {
             </button>
           )}
         </div>
-        <div className="postText">{postObject.postText}</div>
+        <div
+          className="postText"
+          onClick={() => {
+            if (authState.Username === postObject.Username) {
+              editPost("postText");
+            }
+          }}
+        >
+          {postObject.postText}
+        </div>
         <div className="footer">{postObject.Username}</div>
       </div>
       <div className="lowerPart">

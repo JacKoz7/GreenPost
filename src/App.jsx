@@ -120,6 +120,14 @@ function App() {
           </Routes>
           <footer>
             <p>© 2024 GreenPost</p>
+            <p>
+              <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                <img
+                  src="http://jigsaw.w3.org/css-validator/images/vcss"
+                  alt="Poprawny CSS!"
+                />
+              </a>
+            </p>
           </footer>
         </Router>
       </AuthContext.Provider>

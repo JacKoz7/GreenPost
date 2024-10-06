@@ -215,6 +215,13 @@ footer {
   width: 100%;
   text-align: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer a {
+  margin-left: 15%;
 }
 
 p{

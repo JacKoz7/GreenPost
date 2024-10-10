@@ -4,6 +4,7 @@ import {
   Route,
   Routes,
   NavLink,
+  Navigate
 } from "react-router-dom";
 import Home from "./pages/home";
 import CreatePost from "./pages/createpost";
@@ -122,7 +123,12 @@ function App() {
             <Route path="/post/:id" element={<Post />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
-            <Route path="*" element={<PageNotFound />} />
+            <Route
+              path="*"
+              element={
+                !authState.status ? <Navigate to="/login" /> : <PageNotFound />
+              }
+            />
           </Routes>
           <footer>
             <p>© 2024 GreenPost</p>

@@ -103,7 +103,7 @@ function App() {
                   Create a Post
                 </NavLink>
                 <NavLink
-                  to="https://balanced-tie-08a.notion.site/Wymagania-dotycz-ce-projektu-ko-cowego-1160f04add96800ea6edee204d070125"
+                  to="https://balanced-tie-08a.notion.site/Sieci-rozproszone-1150f04add96809bb16dffe3e9b1b213"
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Project notes

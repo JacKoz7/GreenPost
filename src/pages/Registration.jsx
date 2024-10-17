@@ -14,10 +14,6 @@ function Registration() {
 
   const validationSchema = Yup.object().shape({
     Password: Yup.string()
-      .min(6)
-      .max(15)
-      .required("You must input a password!"),
-    Password: Yup.string()
       .min(6, "Password must be at least 6 characters long")
       .max(15, "Password cannot exceed 15 characters")
       .matches(
@@ -29,7 +25,7 @@ function Registration() {
 
   const onSubmit = (data) => {
     axios
-      .post("https://greenpostapp-7e2958a55f01.herokuapp.com/auth", data)
+      .post("http://localhost:3001/auth", data)
       .then((response) => {
         toast.success("Account created successfully!");
       })

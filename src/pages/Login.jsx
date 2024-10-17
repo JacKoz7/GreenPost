@@ -13,7 +13,7 @@ function Login() {
 
   const Login = () => {
     const data = { Username: Username, Password: Password };
-    axios.post("https://greenpostapp-7e2958a55f01.herokuapp.com/auth/login", data).then((response) => {
+    axios.post("http://localhost:3001/auth/login", data).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
       } else {

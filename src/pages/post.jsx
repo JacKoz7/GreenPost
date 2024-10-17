@@ -16,23 +16,20 @@ function Post() {
 
   useEffect(() => {
     //api request to get data from the post
-    axios
-      .get(`https://greenpostapp-7e2958a55f01.herokuapp.com/posts/byId/${id}`)
-      .then((response) => {
-        setPostObject(response.data);
-      });
+    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
+      setPostObject(response.data);
+      console.log(response.data);
+    });
 
-    axios
-      .get(`https://greenpostapp-7e2958a55f01.herokuapp.com/comments/${id}`)
-      .then((response) => {
-        setComments(response.data);
-      });
+    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+      setComments(response.data);
+    });
   }, [id]);
 
   const addComment = () => {
     axios
       .post(
-        "https://greenpostapp-7e2958a55f01.herokuapp.com/comments",
+        "http://localhost:3001/comments",
         {
           CommentBody: newComment,
           PostId: id,
@@ -56,12 +53,9 @@ function Post() {
 
   const deleteComment = (id) => {
     axios
-      .delete(
-        `https://greenpostapp-7e2958a55f01.herokuapp.com/comments/${id}`,
-        {
-          headers: { accessToken: localStorage.getItem("accessToken") },
-        }
-      )
+      .delete(`http://localhost:3001/comments/${id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
       .then(() => {
         setComments(
           comments.filter((val) => {
@@ -77,7 +71,7 @@ function Post() {
     }
 
     axios
-      .delete(`https://greenpostapp-7e2958a55f01.herokuapp.com/posts/${id}`, {
+      .delete(`http://localhost:3001/posts/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
@@ -93,7 +87,7 @@ function Post() {
         return;
       }
       axios.put(
-        "https://greenpostapp-7e2958a55f01.herokuapp.com/posts/title",
+        "http://localhost:3001/posts/title",
         {
           newTitle: newTitle,
           id: id,
@@ -108,7 +102,7 @@ function Post() {
         return;
       }
       axios.put(
-        "https://greenpostapp-7e2958a55f01.herokuapp.com/posts/postText",
+        "http://localhost:3001/posts/postText",
         {
           newText: newPostText,
           id: id,
@@ -121,40 +115,57 @@ function Post() {
 
   return (
     <div className="postPage">
-      <div className="upperPart">
-        <div className="title">
+      <div className="contentContainer">
+        <div className="upperPart">
+          <div className="title">
+            <div
+              className="titleText"
+              onClick={() => {
+                if (authState.Username === postObject.Username || authState.Username === "admin") {
+                  editPost("title");
+                }
+              }}
+            >
+              {postObject.title}
+            </div>
+            {(authState.Username === postObject.Username || authState.Username === "admin") && (
+              <button
+                onClick={() => {
+                  deletePost(postObject.id);
+                }}
+                className="deletePost"
+              >
+                Delete Post
+              </button>
+            )}
+          </div>
           <div
-            className="titleText"
+            className="postText"
             onClick={() => {
-              if (authState.Username === postObject.Username) {
-                editPost("title");
+              if (authState.Username === postObject.Username || authState.Username === "admin") {
+                editPost("postText");
               }
             }}
           >
-            {postObject.title}
+            {postObject.postText}
           </div>
-          {authState.Username === postObject.Username && (
-            <button
-              onClick={() => {
-                deletePost(postObject.id);
+          <div className="footer">{postObject.Username}</div>
+        </div>
+        <div className="postImage">
+          {postObject.imageUrl && (
+            <img
+              className="image"
+              src={`http://localhost:3001${postObject.imageUrl}`}
+              alt="Post img"
+              style={{ maxWidth: "100%", height: "auto" }}
+              onError={(e) => {
+                console.error("Error loading image:", e);
+                e.target.onerror = null;
+                e.target.style.display = "none";
               }}
-              className="deletePost"
-            >
-              Delete Post
-            </button>
+            />
           )}
         </div>
-        <div
-          className="postText"
-          onClick={() => {
-            if (authState.Username === postObject.Username) {
-              editPost("postText");
-            }
-          }}
-        >
-          {postObject.postText}
-        </div>
-        <div className="footer">{postObject.Username}</div>
       </div>
       <div className="lowerPart">
         <div className="addCommentContainer">
@@ -178,7 +189,7 @@ function Post() {
               <div key={key} className="comment">
                 <label className="username">{comment.Username}</label>{" "}
                 {comment.CommentBody}
-                {authState.Username === comment.Username && (
+                {(authState.Username === comment.Username || authState.Username === "admin") && (
                   <button
                     className="deleteButton"
                     onClick={() => {

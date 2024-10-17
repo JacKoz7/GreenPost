@@ -4,12 +4,13 @@ import "../App.css";
 import * as Yup from "yup";
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
   const { authState } = useContext(AuthContext);
   let navigate = useNavigate();
+  const [imageFile, setImageFile] = useState(null);  // State to hold the image file
 
   const initialValues = {
     title: "",
@@ -20,12 +21,22 @@ function CreatePost() {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     }
-  }, [authState, navigate]); // without [] use effect will run inifinitly
+  }, [authState, navigate]); 
 
   const onSubmit = (data) => {
+    const formData = new FormData(); // Create a FormData object
+    formData.append("title", data.title);
+    formData.append("postText", data.postText);
+    if (imageFile) {
+      formData.append("image", imageFile);  // Append the image file if exists
+    }
+
     axios
-      .post("https://greenpostapp-7e2958a55f01.herokuapp.com/posts", data, {
-        headers: { accessToken: localStorage.getItem("accessToken") },
+      .post("http://localhost:3001/posts", formData, {
+        headers: { 
+          accessToken: localStorage.getItem("accessToken"),
+          "Content-Type": "multipart/form-data", // Set correct header for form data
+        },
       })
       .then((response) => {
         navigate("/");
@@ -48,29 +59,37 @@ function CreatePost() {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form>
-          <label>Title:</label>
-          <ErrorMessage name="title" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="title"
-            placeholder="(Ex. Title...)"
-          />
-          <label>Post:</label>
-          <ErrorMessage name="postText" component="span" />
-          <Field
-            autocomplete="off"
-            id="inputCreatePost"
-            name="postText"
-            placeholder="(Write what's on your mind)"
-          />
-
-          <button type="submit">Create Post</button>
-        </Form>
+        {({ setFieldValue }) => (
+          <Form>
+            <label>Title:</label>
+            <ErrorMessage name="title" component="span" />
+            <Field
+              autoComplete="off"
+              id="inputCreatePost"
+              name="title"
+              placeholder="(Ex. Title...)"
+            />
+            <label>Post:</label>
+            <ErrorMessage name="postText" component="span" />
+            <Field
+              autoComplete="off"
+              id="inputCreatePost"
+              name="postText"
+              placeholder="(Write what's on your mind)"
+            />
+            <label>Image (optional):</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) => {
+                setImageFile(event.currentTarget.files[0]);
+              }}
+            />
+            <button type="submit">Create Post</button>
+          </Form>
+        )}
       </Formik>
     </div>
   );
 }
-
 export default CreatePost;

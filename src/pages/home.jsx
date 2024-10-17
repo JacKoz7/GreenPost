@@ -19,7 +19,7 @@ function Home() {
       navigate("/login");
     } else {
       // get request from backend database
-      axios.get("https://greenpostapp-7e2958a55f01.herokuapp.com/posts").then((response) => {
+      axios.get("http://localhost:3001/posts").then((response) => {
         setListOfPosts(response.data);
       });
     }
@@ -34,7 +34,7 @@ function Home() {
 
     axios
       .post(
-        "https://greenpostapp-7e2958a55f01.herokuapp.com/likes",
+        "http://localhost:3001/likes",
         { PostId: postId },
         { headers: { accessToken: accessToken } }
       )

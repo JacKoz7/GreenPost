@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
   NavLink,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 import Home from "./pages/home";
 import CreatePost from "./pages/createpost";
@@ -28,7 +28,7 @@ function App() {
     const token = localStorage.getItem("accessToken");
     if (token) {
       axios
-        .get("https://greenpostapp-7e2958a55f01.herokuapp.com/auth/auth", {
+        .get("http://localhost:3001/auth/auth", {
           headers: { accessToken: token },
         })
         .then((response) => {
@@ -102,12 +102,6 @@ function App() {
                 >
                   Create a Post
                 </NavLink>
-                <NavLink
-                  to="https://balanced-tie-08a.notion.site/Sieci-rozproszone-1150f04add96809bb16dffe3e9b1b213"
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                  Project notes
-                </NavLink>
                 <button onClick={logout} className="navButton">
                   Logout
                 </button>
@@ -118,17 +112,15 @@ function App() {
             )}
           </nav>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={!authState.status ? <Navigate to="/login" /> : <Home />}
+            />
             <Route path="/createpost" element={<CreatePost />} />
             <Route path="/post/:id" element={<Post />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
-            <Route
-              path="*"
-              element={
-                !authState.status ? <Navigate to="/login" /> : <PageNotFound />
-              }
-            />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
           <footer>
             <p>© 2024 GreenPost</p>

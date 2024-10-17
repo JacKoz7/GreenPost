@@ -149,7 +149,15 @@ function Post() {
           >
             {postObject.postText}
           </div>
-          <div className="footer">{postObject.Username}</div>
+          <div className="footer">
+          <div className="postUsername"
+                onClick={() => {
+                  navigate(`/profile/${postObject.UserId}`);
+                }}
+              >
+                {postObject.Username}
+              </div>
+          </div>
         </div>
         <div className="postImage">
           {postObject.imageUrl && (

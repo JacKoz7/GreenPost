@@ -665,11 +665,6 @@ nav a.active {
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.noPosts:hover {
-  transform: scale(1.05); /* Slightly enlarge on hover */
-  background-color: #ffe5e5; /* Slightly darker background on hover */
-}
-
 .basicInfo {
   text-align: center;
   margin-bottom: 10%;
@@ -714,4 +709,20 @@ nav a.active {
   100% {
     transform: scale(1);
   }
+}
+
+.postUsername {
+  color: forestgreen; /* Blue color */
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.postUsername:hover {
+  background-color: #e9f5ff; /* Light blue background on hover */
+  color: #0056b3; /* Darker blue color on hover */
 }

@@ -16,13 +16,15 @@ import { AuthContext } from "./helpers/AuthContext";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import logo from "./images/logo.png";
+import Profile from "./pages/Profile";
 
 function App() {
   const [authState, setAuthState] = useState({
     Username: "",
     id: 0,
     status: false,
-  }); // initialize authState based on localStorage
+  });
+  const [loading, setLoading] = useState(true); // initialize loading state
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -41,9 +43,16 @@ function App() {
               status: true,
             });
           }
+          setLoading(false); // set loading to false after checking token
+        })
+        .catch(() => {
+          setAuthState((prevState) => ({ ...prevState, status: false }));
+          setLoading(false); // set loading to false if there's an error
         });
+    } else {
+      setLoading(false); // set loading to false if no token
     }
-  }, []); // empty array to run only once
+  }, []);
 
   const logout = () => {
     if (window.confirm("Are you sure you want to logout?")) {
@@ -51,6 +60,10 @@ function App() {
       setAuthState({ Username: "", id: 0, status: false });
     }
   };
+
+  if (loading) {
+    return <div className="loading">Loading...</div>; // show loading indicator while checking token
+  }
 
   return (
     <div className="App">
@@ -105,9 +118,12 @@ function App() {
                 <button onClick={logout} className="navButton">
                   Logout
                 </button>
-                <span className="navUsername">
+                <NavLink
+                  to={`/profile/${authState.id}`}
+                  className="navUsername"
+                >
                   Logged in as {authState.Username}
-                </span>
+                </NavLink>
               </>
             )}
           </nav>
@@ -120,6 +136,7 @@ function App() {
             <Route path="/post/:id" element={<Post />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
+            <Route path="/profile/:id" element={<Profile />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <footer>

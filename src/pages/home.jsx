@@ -74,7 +74,12 @@ function Home() {
             >
               {value.postText}
             </div>
-            <div className="footer">
+            <div
+              className="footer"
+              onClick={() => {
+                navigate(`/profile/${value.UserId}`);
+              }}
+            >
               {value.Username}
               <div>
                 <button

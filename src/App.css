@@ -468,6 +468,7 @@ nav a.active {
 
 /* Center the registration container on the page */
 .registration-container {
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -648,4 +649,69 @@ nav a.active {
   width: 100%;
   max-width: 1420px; /* Adjust based on your design needs */
   margin-bottom: 20px; /* Add some space between upper and lower parts */
+}
+
+.noPosts {
+  color: #ff6347; /* Tomato color */
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
+  padding: 15px;
+  border: 2px dashed #ff6347; /* Dashed border with tomato color */
+  border-radius: 10px;
+  background-color: #fff5f5; /* Light tomato background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.noPosts:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  background-color: #ffe5e5; /* Slightly darker background on hover */
+}
+
+.basicInfo {
+  text-align: center;
+  margin-bottom: 10%;
+  margin-top: -5%;
+  padding: 6%;
+  background-color: #f0f8ff; /* AliceBlue background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border: #006400 6px solid; /* DarkGreen border */
+}
+
+.mainHeader {
+  color: #333; /* Darker text color */
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+  padding: 10px;
+  font-family: "Arial", sans-serif; /* Change the font family as needed */
+  border-bottom: 5px solid #00FF00; /* Tomato color underline */
+  display: inline-block;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6347; /* Tomato color */
+  background-color: #f0f8ff; /* AliceBlue background */
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

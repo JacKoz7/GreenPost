@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../App.css";
 
 function Profile() {
   let { id } = useParams();
   const [username, setUsername] = useState("");
   const [listOfPosts, setListOfPosts] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
   let navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      axios.get("http://localhost:3001/auth/auth", {
+        headers: {
+          accessToken: token,
+        },
+      }).then((response) => {
+        if (response.data.Username === 'admin') {
+          setIsAdmin(true);
+        }
+      });
+    }
+
     axios.get(`http://localhost:3001/auth/basicinfo/${id}`).then((response) => {
       setUsername(response.data.Username);
     });
@@ -19,33 +32,39 @@ function Profile() {
     });
   }, [id]);
 
+  const deleteUser = () => {
+    const token = localStorage.getItem("accessToken");
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      // Changed the URL from /auth/ to /users/
+      axios.delete(`http://localhost:3001/auth/${id}`, {
+        headers: {
+          accessToken: token,
+        },
+      }).then(() => {
+        navigate("/");
+      });
+    }
+  };
+
   return (
     <div className="profilePageContainer">
       <div className="basicInfo">
-        <h1 className="mainHeader">{username}'s Posts:</h1>
+        <h1>{username}'s Posts:</h1>
       </div>
       <div className="listOfPosts">
-        {listOfPosts.length === 0 ? (
-          <div className="noPosts">No posts found for this user.</div>
-        ) : (
-          listOfPosts.map((post, key) => {
-            return (
-              <div className="post" key={key}>
-                <div className="title">{post.title}</div>
-                <div
-                  className="body"
-                  onClick={() => {
-                    navigate(`/post/${post.id}`);
-                  }}
-                >
-                  {post.postText}
-                </div>
-                <div className="footer">{post.Username}</div>
+        {listOfPosts.map((post, key) => {
+          return (
+            <div className="post" key={key}>
+              <div className="title">{post.title}</div>
+              <div className="body" onClick={() => navigate(`/post/${post.id}`)}>
+                {post.postText}
               </div>
-            );
-          })
-        )}
+              <div className="footer">{post.Username}</div>
+            </div>
+          );
+        })}
       </div>
+      {isAdmin && <button className="deleteUserButton" onClick={deleteUser}>Delete User</button>}
     </div>
   );
 }

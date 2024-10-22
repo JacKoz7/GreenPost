@@ -726,3 +726,28 @@ nav a.active {
   background-color: #e9f5ff; /* Light blue background on hover */
   color: #0056b3; /* Darker blue color on hover */
 }
+
+.deleteUserButton {
+  display: block;
+  margin: 8% auto; /* Center the button horizontally and add vertical margin */
+  margin-top: -7%;
+  padding: 2%;
+  font-size: 1.6em; /* Font size relative to the parent element */
+  font-weight: bold;
+  color: white;
+  background-color: #ff6347; /* Tomato color */
+  border: none;
+  border-radius: 5%; /* Border radius with percentage */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.deleteUserButton:hover {
+  background-color: #e5533d; /* Darker tomato color on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.deleteUserButton:active {
+  background-color: #cc4a33; /* Even darker tomato color on click */
+  transform: scale(1); /* Reset scale on click */
+}

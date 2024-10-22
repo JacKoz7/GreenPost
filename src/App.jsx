@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import logo from "./images/logo.png";
 import Profile from "./pages/Profile";
+import LogoutButton from "./pages/LogoutButton"; // Import the new component
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -53,13 +54,6 @@ function App() {
       setLoading(false); // set loading to false if no token
     }
   }, []);
-
-  const logout = () => {
-    if (window.confirm("Are you sure you want to logout?")) {
-      localStorage.removeItem("accessToken");
-      setAuthState({ Username: "", id: 0, status: false });
-    }
-  };
 
   if (loading) {
     return <div className="loading">Loading...</div>; // show loading indicator while checking token
@@ -115,9 +109,7 @@ function App() {
                 >
                   Create a Post
                 </NavLink>
-                <button onClick={logout} className="navButton">
-                  Logout
-                </button>
+                <LogoutButton /> {/* Use the new component */}
                 <NavLink
                   to={`/profile/${authState.id}`}
                   className="navUsername"

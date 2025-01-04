@@ -16,10 +16,6 @@ function Registration() {
     Password: Yup.string()
       .min(6, "Password must be at least 6 characters long")
       .max(15, "Password cannot exceed 15 characters")
-      .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,15}$/,
-        "Password must contain at least one letter and one number"
-      )
       .required("You must input a password!"),
   });
 
@@ -34,7 +30,7 @@ function Registration() {
           toast.error(error.response.data.error);
         } else {
           toast.error(
-            "Password must contain at least six letters and one number"
+            "Password must be at least 6 characters long and cannot exceed 15 characters"
           );
         }
       });

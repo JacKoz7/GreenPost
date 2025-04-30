@@ -13,25 +13,26 @@ function Registration() {
   };
 
   const validationSchema = Yup.object().shape({
+    Username: Yup.string()
+      .min(3, "Username musi mieć co najmniej 3 znaki")
+      .required("Username jest wymagany"),
+    
     Password: Yup.string()
-      .min(6, "Password must be at least 6 characters long")
-      .max(15, "Password cannot exceed 15 characters")
-      .required("You must input a password!"),
+      .min(4, "Hasło musi mieć co najmniej 4 znaki")
+      .required("Hasło jest wymagane"),
   });
 
   const onSubmit = (data) => {
     axios
       .post("http://localhost:3001/auth", data)
-      .then((response) => {
-        toast.success("Account created successfully!");
+      .then(() => {
+        toast.success("Konto utworzone pomyślnie!");
       })
       .catch((error) => {
         if (error.response && error.response.data.error) {
           toast.error(error.response.data.error);
         } else {
-          toast.error(
-            "Password must be at least 6 characters long and cannot exceed 15 characters"
-          );
+          toast.error("Błąd podczas rejestracji");
         }
       });
   };
@@ -39,7 +40,7 @@ function Registration() {
   return (
     <div className="registration-container">
       <ToastContainer />
-      <h2 className="registration-title">Register</h2>
+      <h2 className="registration-title">Rejestracja</h2>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -47,32 +48,34 @@ function Registration() {
       >
         <Form className="registration-form">
           <label className="registration-label">Username:</label>
+          <Field
+            autoComplete="off"
+            className="registration-input"
+            name="Username"
+            placeholder="Nazwa użytkownika"
+          />
           <ErrorMessage
             name="Username"
             component="span"
             className="registration-error"
           />
-          <Field
-            autoComplete="off"
-            className="registration-input"
-            name="Username"
-            placeholder="(Ex. John...)"
-          />
-          <label className="registration-label">Password:</label>
-          <ErrorMessage
-            name="Password"
-            component="span"
-            className="registration-error"
-          />
+
+          <label className="registration-label">Hasło:</label>
           <Field
             autoComplete="off"
             className="registration-input"
             name="Password"
-            placeholder="Your password"
+            placeholder="Twoje hasło"
             type="password"
           />
+          <ErrorMessage
+            name="Password"
+            component="span"
+            className="registration-error"
+          />
+
           <button type="submit" className="registration-button">
-            Register
+            Zarejestruj
           </button>
         </Form>
       </Formik>

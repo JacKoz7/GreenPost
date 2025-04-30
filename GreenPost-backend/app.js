@@ -11,7 +11,7 @@ app.use('/uploads', express.static('uploads'));
 
 const db = require("./models");
 
-const PORT = process.env.PORT || 3001; // works for heroku
+const PORT = process.env.PORT || 3001; 
 
 // Routers
 const postRouter = require("./routes/Posts");

@@ -3,17 +3,17 @@ const { body, validationResult } = require('express-validator');
 
 const validateRegistration = [
   body('Username')
-    .isLength({ min: 3, max: 15 })
-    .withMessage('Username must be between 3 and 15 characters')
-    .matches(/^[a-zA-Z0-9]+$/)
-    .withMessage('Username must be alphanumeric'),
+    .isLength({ min: 3 })
+    .withMessage('Username musi mieć co najmniej 3 znaki'),
+  
   body('Password')
-    .isLength({ min: 6, max: 15 })
-    .withMessage('Password must be between 6 and 15 characters'),
+    .isLength({ min: 4 })
+    .withMessage('Hasło musi mieć co najmniej 4 znaki'),
+  
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ error: errors.array()[0].msg });
     }
     next();
   },

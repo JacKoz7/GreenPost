@@ -1,0 +1,52 @@
+services:
+  frontend:
+    build: ./GreenPost-frontend
+    ports:
+      - "3000:80"  # Map port 3000 to Nginx's port 80
+    depends_on:
+      backend:
+        condition: service_started
+    networks:
+      - app-network
+
+  backend:
+    build: ./GreenPost-backend
+    ports:
+      - "3001:3001"  
+    env_file:
+      - ./GreenPost-backend/.env
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - app-network 
+
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: haslo123
+      MYSQL_DATABASE: greenpost
+    ports:
+      - "3306:3306"  # Keep this if you need external access
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-phaslo123"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge

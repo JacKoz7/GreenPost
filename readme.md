@@ -65,3 +65,19 @@ docker compose down
 Once the application is running, you can access the frontend at:
 
 [http://localhost:3000](http://localhost:3000)
+
+## Screenshots
+
+<table>
+  <tr>
+    <td><img width="720" alt="GreenPost login" src="https://github.com/user-attachments/assets/47356428-6770-4fa0-9b86-3e65b7c96542" /></td>
+    <td><img width="720" alt="Create post" src="https://github.com/user-attachments/assets/a0ce44cc-1475-43e1-ab79-91a3b8c04325" /></td>
+  </tr>
+  <tr>
+    <td><img width="720" alt="Dashboard" src="https://github.com/user-attachments/assets/777d9f7e-b16c-40db-91ec-98ed74529e3c" /></td>
+    <td><img width="720" alt="Profile posts" src="https://github.com/user-attachments/assets/ccf152bd-265e-430f-a2e0-7aa6d8f4ff3f" /></td>
+  </tr>
+</table>
+
+
+
